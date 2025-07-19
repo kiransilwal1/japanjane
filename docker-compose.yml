@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000" # Expose port 4000
+    environment:
+      - NODE_ENV=production
+    networks:
+      - kiran_mynetwork # Must match the first file
+
+networks:
+  kiran_mynetwork:
+    external: true
