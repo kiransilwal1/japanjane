@@ -1,0 +1,34 @@
+# Allow Facebook's crawler
+User-agent: facebookexternalhit
+Allow: /
+
+# Allow Twitter's crawler
+User-agent: Twitterbot
+Allow: /
+
+# Allow LinkedIn's crawler
+User-agent: LinkedInBot
+Allow: /
+
+# Allow WhatsApp's crawler
+User-agent: WhatsApp
+Allow: /
+
+# Allow Telegram's crawler
+User-agent: TelegramBot
+Allow: /
+
+# Allow Discord's crawler
+User-agent: Discordbot
+Allow: /
+
+# General rules for other bots
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://japanjane.com/sitemap.xml
