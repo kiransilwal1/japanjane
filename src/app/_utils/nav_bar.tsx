@@ -10,7 +10,7 @@ export default async function NavBar() {
   return (
     <div
       className="p-300 flex tablet:items-center justify-between tablet:justify-start
-            tablet:p-800 mobile:p-400 border-1 border-border-default-default
+            tablet:p-800 mobile:p-400 border-b-1 border-border-default-default
             tablet:gap-x-600 "
     >
       <img
