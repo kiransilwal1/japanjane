@@ -1,10 +1,12 @@
-import Image from "next/image";
+import MaxWidthWrapper from "@/core/components/max_width_wrapper";
+import NavBar from "./_utils/nav_bar";
+import Home from "./_utils/home";
 
-export default function Home() {
+export default async function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      Welcome to Japanjane
-      <h1>Japan Jane</h1>
-    </div>
+    <>
+      <NavBar></NavBar>
+      <Home></Home>
+    </>
   );
 }
