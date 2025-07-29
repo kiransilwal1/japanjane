@@ -30,9 +30,11 @@ export default async function NavBar() {
         <Link text="Opening" enabled={pathname == "/Opening"}></Link>
         <Link text="Language" enabled={pathname == "/Language"}></Link>
         <Link text="Service" enabled={pathname == "/Service"}></Link>
-        <ThemeSwitcher></ThemeSwitcher>
       </div>
-      <HamburgIcon></HamburgIcon>
+      <section className="flex space-x-200">
+        <ThemeSwitcher></ThemeSwitcher>
+        <HamburgIcon></HamburgIcon>
+      </section>
     </div>
   );
 }
