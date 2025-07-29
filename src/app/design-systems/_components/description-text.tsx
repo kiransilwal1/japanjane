@@ -2,7 +2,7 @@ import { Button } from "@/core/components/buttons/button";
 
 const DescriptionText = () => {
   return (
-    <div className="w-full grid grid-rows-[auto_1fr] gap-y-400">
+    <div className="grid gap-y-400 text-wrap">
       <p className="flex items-start heading-large self-start text-text-default-secondary">
         Title
       </p>

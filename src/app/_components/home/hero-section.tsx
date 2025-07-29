@@ -2,7 +2,7 @@ import { Button } from "@/core/components/buttons/button";
 import MaxWidthWrapper from "@/core/components/max_width_wrapper";
 import { MessageCircle, MessageSquare } from "lucide-react";
 
-const Home = () => {
+const HeroSection = () => {
   return (
     <MaxWidthWrapper className="bg-background-default-secondary tablet:px-4000">
       <section
@@ -36,4 +36,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HeroSection;

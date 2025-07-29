@@ -1,6 +1,12 @@
 // layout.tsx
 import { ThemeProvider } from "./_utils/theme_context";
 import "./globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Japan Jane: जापान जाने | Work Visa Japan",
+  description: "जापानमा रोजगारी सम्बन्धी पूर्ण जानकारी",
+};
 
 export default function RootLayout({
   children,
