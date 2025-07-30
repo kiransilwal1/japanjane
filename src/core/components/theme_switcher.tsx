@@ -9,7 +9,6 @@ interface IconSwitchProps {
   disabled?: boolean;
 }
 
-// IconSwitch component (you can move this to a separate file)
 const IconSwitch: React.FC<IconSwitchProps> = ({
   isOn,
   onToggle,
@@ -50,21 +49,34 @@ const IconSwitch: React.FC<IconSwitchProps> = ({
 };
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { actualTheme, setTheme, isLoading } = useTheme();
 
-  // Determine if dark mode is active
-  const isDarkMode = theme === "dark";
+  // Use actualTheme instead of theme to determine switch state
+  const isDarkMode = actualTheme === "dark";
 
-  // Handle toggle between light and dark
+  // Don't render until theme is loaded to prevent flash
+  if (isLoading) {
+    return (
+      <div className="flex items-center space-x-3">
+        <div className="h-8 w-14 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+      </div>
+    );
+  }
+
+  // Handle toggle between light and dark (now cycles through system -> light -> dark)
   const handleToggle = () => {
-    setTheme(isDarkMode ? "light" : "dark");
+    if (actualTheme === "dark") {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
   };
 
   // Icon components
   const SunIcon = () => (
     <svg
       className="h-4 w-4 text-text-brand-on-brand"
-      fill="bg-background-default-secondary"
+      fill="currentColor"
       viewBox="0 0 20 20"
     >
       <path
@@ -78,7 +90,7 @@ export default function ThemeSwitcher() {
   const MoonIcon = () => (
     <svg
       className="h-4 w-4 text-gray-600"
-      fill="bg-background-brand-default"
+      fill="currentColor"
       viewBox="0 0 20 20"
     >
       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />

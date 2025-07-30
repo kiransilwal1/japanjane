@@ -3,6 +3,7 @@ import Tags from "../tags";
 import { MapPin, Wallet, X } from "lucide-react";
 import { Button } from "@/core/components/buttons/button";
 import SalaryDisplay from "./salary-display";
+import { WhatsAppButton } from "./whatsapp-button";
 
 type JobCardProps = {
   variant?: "vertical" | "horizontal";
@@ -75,12 +76,14 @@ const JobCards = ({
         >
           Work as a Line supervisor. Overlook all operational tasks.{" "}
         </p>
-        <Button
-          text="Apply Now"
-          variant="accent"
-          className="w-full
-                    flex items-center justify-center"
-        ></Button>
+        <WhatsAppButton phoneNumber="+819082900547">
+          <Button
+            text="Apply Now"
+            variant="accent"
+            className="w-full
+            flex items-center justify-center"
+          ></Button>
+        </WhatsAppButton>
       </section>
     </div>
   );

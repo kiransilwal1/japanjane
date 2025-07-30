@@ -1,6 +1,7 @@
 import { Button } from "@/core/components/buttons/button";
 import MaxWidthWrapper from "@/core/components/max_width_wrapper";
 import { MessageCircle, MessageSquare } from "lucide-react";
+import { WhatsAppButton } from "./whatsapp-button";
 
 const HeroSection = () => {
   return (
@@ -21,11 +22,13 @@ const HeroSection = () => {
             </div>
           </section>
           <div className="flex justify-center tablet:justify-start">
-            <Button
-              variant="accent"
-              text="Message Now"
-              iconLeading={<MessageSquare></MessageSquare>}
-            ></Button>
+            <WhatsAppButton phoneNumber="+819082900547">
+              <Button
+                variant="accent"
+                text="Message Now"
+                iconLeading={<MessageSquare></MessageSquare>}
+              ></Button>
+            </WhatsAppButton>
           </div>
         </div>
         <div className="max-w-screen">
