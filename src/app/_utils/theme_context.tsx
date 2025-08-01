@@ -1,111 +1,88 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | "system";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+
+type Theme = "system" | "light" | "dark" | "high-contrast";
 
 interface ThemeContextType {
   theme: Theme;
-  actualTheme: "light" | "dark";
   setTheme: (theme: Theme) => void;
-  isLoading: boolean;
+  resolvedTheme: "light" | "dark" | "high-contrast";
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>("system");
-  const [actualTheme, setActualTheme] = useState<"light" | "dark">("light");
-  const [isLoading, setIsLoading] = useState(true);
+  const [resolvedTheme, setResolvedTheme] = useState<
+    "light" | "dark" | "high-contrast"
+  >("light");
 
-  // Function to get system preference
-  const getSystemTheme = (): "light" | "dark" => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return "light";
-  };
-
-  // Function to resolve the actual theme
-  const resolveTheme = (currentTheme: Theme): "light" | "dark" => {
-    if (currentTheme === "system") {
-      return getSystemTheme();
-    }
-    return currentTheme;
-  };
-
-  // Initialize theme and actual theme immediately
   useEffect(() => {
-    const initializeTheme = () => {
-      // Get saved theme from localStorage
-      const savedTheme = localStorage.getItem("theme") as Theme;
-      let initialTheme: Theme = "system";
-
-      if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
-        initialTheme = savedTheme;
-      }
-
-      // Resolve the actual theme immediately
-      const resolved = resolveTheme(initialTheme);
-
-      // Set both theme and actualTheme
-      setTheme(initialTheme);
-      setActualTheme(resolved);
-
-      // Apply theme to document immediately
-      const root = document.documentElement;
-      root.classList.remove("light", "dark");
-      root.classList.add(resolved);
-
-      setIsLoading(false);
-    };
-
-    initializeTheme();
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    if (
+      savedTheme &&
+      ["system", "light", "dark", "high-contrast"].includes(savedTheme)
+    ) {
+      setTheme(savedTheme);
+    }
   }, []);
 
-  // Update actual theme when theme changes (after initialization)
   useEffect(() => {
-    if (isLoading) return;
-
-    const resolved = resolveTheme(theme);
-    setActualTheme(resolved);
-
-    // Apply theme to document
     const root = document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(resolved);
 
-    // Save to localStorage
+    root.classList.remove("theme-light", "theme-dark", "theme-high-contrast");
+
+    let newResolvedTheme: "light" | "dark" | "high-contrast";
+
+    if (theme === "system") {
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      newResolvedTheme = systemPrefersDark ? "dark" : "light";
+    } else if (theme === "high-contrast") {
+      root.classList.add("theme-high-contrast");
+      newResolvedTheme = "high-contrast";
+    } else {
+      root.classList.add(`theme-${theme}`);
+      newResolvedTheme = theme as "light" | "dark";
+    }
+
+    setResolvedTheme(newResolvedTheme);
     localStorage.setItem("theme", theme);
-  }, [theme, isLoading]);
+  }, [theme]);
 
-  // Listen for system theme changes
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (theme !== "system") return;
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
     const handleChange = () => {
-      if (theme === "system") {
-        const newActualTheme = getSystemTheme();
-        setActualTheme(newActualTheme);
-
-        // Apply theme to document
-        const root = document.documentElement;
-        root.classList.remove("light", "dark");
-        root.classList.add(newActualTheme);
-      }
+      const systemPrefersDark = mediaQuery.matches;
+      setResolvedTheme(systemPrefersDark ? "dark" : "light");
     };
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [theme]);
 
+  const value = {
+    theme,
+    setTheme,
+    resolvedTheme,
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, actualTheme, setTheme, isLoading }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 
