@@ -18,7 +18,7 @@ export default function ReviewSection({ id }: SectionProp) {
         <Reviews
           title="Smooth Process Experience"
           body="The team made the process of going to Japan clear and stress-free. They handled paperwork efficiently, kept me informed at every step, and provided helpful guidance about living abroad. I felt supported from start to finish."
-          designation="Field Worker, Osaka"
+          designation="Manager, Marriot Japan"
           name="Ramesh Silwal"
           image="/job-japan.png"
         ></Reviews>
