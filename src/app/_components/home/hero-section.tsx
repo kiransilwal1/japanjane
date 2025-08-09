@@ -3,10 +3,15 @@ import MaxWidthWrapper from "@/core/components/max_width_wrapper";
 import { MessageCircle, MessageSquare } from "lucide-react";
 import { WhatsAppButton } from "./whatsapp-button";
 
-const HeroSection = () => {
+export interface SectionProp {
+  id?: string;
+}
+
+const HeroSection = ({ id }: SectionProp) => {
   return (
     <MaxWidthWrapper className="bg-background-default-secondary tablet:px-4000">
       <section
+        id={id}
         className="py-1200 grid grid-cols-1 gap-1200 tablet:grid-cols-2
                 justify-items-center place-items-center"
       >

@@ -74,7 +74,7 @@ const JobCards = ({
           className="body-large text-wrap break-words overflow-wrap-anywhere
                     text-text-default-secondary"
         >
-          Work as a Line supervisor. Overlook all operational tasks.{" "}
+          {description}
         </p>
         <WhatsAppButton phoneNumber="+819082900547">
           <Button

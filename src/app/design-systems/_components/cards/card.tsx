@@ -8,6 +8,7 @@ type CardProps = {
   title: string;
   leadingComponent?: ReactNode;
   className?: string;
+  buttonText?: string;
 };
 
 const variantClasses = {
@@ -21,6 +22,7 @@ const Card = ({
   title,
   leadingComponent,
   className = "",
+  buttonText,
 }: CardProps) => {
   const baseClasses =
     "items-start justify-start border-1 border-border-default-default bg-background-default-default rounded-200 p-600";
@@ -35,7 +37,11 @@ const Card = ({
       {leadingComponent && (
         <div className=" flex-col justify-start">{leadingComponent}</div>
       )}
-      <DescriptionText />
+      <DescriptionText
+        title={title}
+        content={description}
+        buttonText={buttonText}
+      />
     </div>
   );
 };

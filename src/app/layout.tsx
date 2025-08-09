@@ -1,5 +1,6 @@
 // layout.tsx
 import { ThemeProvider } from "./_utils/theme_context";
+import Footer from "./design-systems/_components/footer";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -121,7 +122,10 @@ export default function RootLayout({
           fontFamily: "var(--font-family-sans)",
         }}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Footer></Footer>
+        </ThemeProvider>
       </body>
     </html>
   );
