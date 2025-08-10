@@ -8,7 +8,7 @@ TARGET_DIR="/home/kiran/japanjane"
 # Run commands on the server
 ssh -p $PORT $SERVER <<'EOF'
   REPO_URL="git@github.com:kiransilwal1/japanjane.git"
-  APP_DIR="/home/kiran/japanjane-mono/japanjane/"
+  APP_DIR="/home/kiran/japanjane_mono/japanjane/"
 
   echo "🔹 Connecting to server and deploying updates..."
 
