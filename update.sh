@@ -8,7 +8,7 @@ TARGET_DIR="/home/kiran/japanjane"
 # Run commands on the server
 ssh -p $PORT $SERVER <<'EOF'
   REPO_URL="git@github.com:kiransilwal1/japanjane.git"
-  APP_DIR="/home/kiran/japanjane"
+  APP_DIR="/home/kiran/japanjane-mono/japanjane/"
 
   echo "🔹 Connecting to server and deploying updates..."
 
@@ -22,7 +22,7 @@ ssh -p $PORT $SERVER <<'EOF'
     git clone $REPO_URL $APP_DIR
     cd $APP_DIR
   fi
-
+  cd $TARGET_DIR
   # Restart Docker without sudo
   echo "🚀 Restarting Docker containers..."
   docker-compose down
