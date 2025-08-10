@@ -14,6 +14,7 @@ type JobCardProps = {
   instructionTitle?: string;
   instructionDescription?: string;
   className?: string;
+  image?: string;
 };
 
 const variantClasses = {
@@ -27,6 +28,7 @@ const JobCards = ({
   title,
   salary,
   location,
+  image,
   instructionTitle,
   instructionDescription,
   className = "",
@@ -41,8 +43,8 @@ const JobCards = ({
 
   return (
     <div className={`${finalClassName} flex-col gap-y-1600`}>
-      <div className="max-w-screen">
-        <img src="/job-japan.png" alt="Logo" />
+      <div className="max-w-screen h-[200px] w-full overflow-hidden rounded-md">
+        <img src={image} alt="Logo" className="w-full h-full object-cover" />
       </div>
       <section className="space-y-600 w-full">
         <div className="space-y-400 flex-col text-wrap">

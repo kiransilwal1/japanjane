@@ -13,13 +13,11 @@ export default function UserDetails({
 }: UserDetailPorps) {
   return (
     <div className="space-x-300 flex flex-row items-center justify-start">
-      <div className="rounded-full shadow-md">
+      <div className="rounded-full shadow-md overflow-hidden w-10 h-10">
         <img
           src={imageSrc}
-          alt="logo"
-          width={40}
-          height={40}
-          className="rounded-full"
+          alt="avatar"
+          className="w-full h-full object-cover rounded-full"
         />
       </div>
       <div>
