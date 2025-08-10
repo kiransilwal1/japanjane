@@ -3,7 +3,7 @@
 # Server Variables
 SERVER="kiran@78.47.234.203"
 PORT=8228
-TARGET_DIR="/home/kiran/japanjane"
+TARGET_DIR="/home/kiran/japanjane_mono"
 
 # Run commands on the server
 ssh -p $PORT $SERVER <<'EOF'
